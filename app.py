@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import (Flask, redirect, render_template,
+                   request, url_for)
 from data_manager import DataManager
 from models import db, Movie
 from dotenv import load_dotenv
@@ -20,7 +21,21 @@ data_manager = DataManager() # Create a object from DataManager class
 
 @app.get("/")
 def home():
-    return "Welcome to MovieWebApp"
+    """Load and show the home page template
+    and a list of all users, with add new user form."""
+    users = data_manager.get_users()
+    return render_template("index.html",
+                           users=users)
+
+
+@app.post("/users")
+def submit_new_user_to_database():
+    """If the form add user is submitted,
+    create a new user in db and redirect to home."""
+    name = request.form.get("name")
+    if name:
+        data_manager.create_user(name)
+    return redirect(url_for("home"))
 
 
 
