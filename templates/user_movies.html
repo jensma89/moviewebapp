@@ -28,11 +28,19 @@
         <!-- Update Movie Form -->
         <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
             <input type="text" name="title" placeholder="New Title" required>
-            <button type="submit">Change Title</button>
+            <button type="submit" style="background-color: blue; color: white;">Change Title</button>
         </form>
 
         <p>{{ movie.director }}</p>
         <p>{{ movie.year }}</p>
+
+        <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
+            <button type="submit"
+                    style="background-color: red; color: white;"
+                    onclick="return confirm('Are you sure you want to delete {{ movie.title }}?');">
+                Delete
+                </button>
+        </form>
     </div>
 {% endfor %}
 

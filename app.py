@@ -88,6 +88,16 @@ def update_movie_title(user_id, movie_id):
         user_id=user_id))
 
 
+@app.post("/users/<int:user_id>/movies/<int:movie_id>/delete")
+def delete_movie(user_id, movie_id):
+    """Delete a movie from the database of a specific user."""
+    data_manager.delete_movie(movie_id)
+    return redirect(url_for(
+        "list_user_movies",
+        user_id=user_id))
+
+
+
 
 
 
