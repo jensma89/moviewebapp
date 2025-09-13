@@ -38,3 +38,23 @@ class DataManager:
         db.session.add(new_movie)
         db.session.commit()
         return new_movie
+
+
+    def update_movie(self, movie_id, new_title):
+        """Update a movie by specified id in the database"""
+        movie = Movie.query.get(movie_id)
+        if not Movie:
+            return None
+        movie.title = new_title
+        db.session.commit()
+        return movie
+
+
+    def delete_movie(self, movie_id):
+        """Delete a movie by id from the database"""
+        movie = Movie.query.ge(movie_id)
+        if not Movie:
+            return False
+        db.session.delete(movie)
+        db.session.commit()
+        return True
