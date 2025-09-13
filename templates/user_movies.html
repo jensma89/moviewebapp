@@ -21,16 +21,20 @@
     </a><br>
 
         {% for movie in movies %}
-            <div>
-                <h3>{{ movie.title }}</h3>
-                <img src="{{ movie.poster_url }}"
-                     width="200px"
-                     height="240px"
-                     alt="Movie Cover">
-                <p>{{ movie.director }}</p>
-                <p>{{ movie.year }}</p>
-            </div>
-        {% endfor %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px; display:inline-block; text-align:center;">
+        <img src="{{ movie.poster_url }}" width="320" height="480" alt="Movie Cover"><br>
+        <h3>{{ movie.title }}</h3>
+
+        <!-- Update Movie Form -->
+        <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
+            <input type="text" name="title" placeholder="New Title" required>
+            <button type="submit">Change Title</button>
+        </form>
+
+        <p>{{ movie.director }}</p>
+        <p>{{ movie.year }}</p>
+    </div>
+{% endfor %}
 
 </body>
 </html>

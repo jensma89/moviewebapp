@@ -78,6 +78,18 @@ def add_movie_to_list(user_id):
 
 
 
+@app.post("/users/<int:user_id>/movies/<int:movie_id>/update")
+def update_movie_title(user_id, movie_id):
+    """Change the movie title without OMDb correction"""
+    new_title = request.form.get("title")
+    data_manager.update_movie(movie_id, new_title)
+    return redirect(url_for(
+        "list_user_movies",
+        user_id=user_id))
+
+
+
+
 
 load_dotenv()
 api_key = os.getenv("OMDB_API_KEY")
