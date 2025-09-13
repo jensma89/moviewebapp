@@ -9,7 +9,7 @@ import os
 API_KEY = os.getenv("OMDB_API_KEY")
 
 
-def fetch_movie_date(title):
+def fetch_movie_data(title):
     """Fetch movie data from omdb API"""
     url = f"http://www.omdbapi.com/?t={title}&apikey={API_KEY}"
     response = requests.get(url)

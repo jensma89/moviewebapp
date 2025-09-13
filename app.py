@@ -3,6 +3,7 @@ from flask import (Flask, redirect, render_template,
 from data_manager import DataManager
 from models import db, Movie
 from dotenv import load_dotenv
+from fetch_movie import fetch_movie_data
 import os
 
 app = Flask(__name__)
@@ -46,6 +47,35 @@ def list_user_movies(user_id):
     return render_template("user_movies.html",
                            user=user,
                            movies=movies)
+
+
+@app.post("/users/<int:user_id>/movies")
+def add_movie_to_list(user_id):
+    """Add a movie to the database of a specific user."""
+    title = request.form.get("title")
+
+    if not title:
+        return redirect(url_for(
+            "list_user_movies",
+            user_id=user_id))
+
+    # OMDb request
+    movie_data = fetch_movie_data(title)
+
+    if not movie_data: # Movie not found
+        return redirect(url_for(
+            "list_user_movies",
+            user_id=user_id))
+
+    # Set user ID
+    movie_data['user_id'] = user_id
+
+    # Save movie to database
+    data_manager.add_movie(movie_data)
+    return redirect(url_for(
+        "list_user_movies",
+        user_id=user_id))
+
 
 
 

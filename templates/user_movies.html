@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>MovieWebApp - Home</title>
+</head>
+<body>
+    <h1>MovieWebApp Movies</h1>
+    <h2>Favorite Movies of {{ user.name }}</h2>
+
+    <form method="POST" action="{{ url_for('add_movie_to_list', user_id=user.id) }}">
+        <input type="text" name="title" placeholder="Movie Title" required>
+        <button type="submit">Add Movie</button><br>
+    </form>
+
+    <a href="{{ url_for('home') }}">
+      <button>Back To Home</button>
+    </a><br>
+
+        {% for movie in movies %}
+            <div>
+                <h3>{{ movie.title }}</h3>
+                <img src="{{ movie.poster_url }}"
+                     width="200px"
+                     height="240px"
+                     alt="Movie Cover">
+                <p>{{ movie.director }}</p>
+                <p>{{ movie.year }}</p>
+            </div>
+        {% endfor %}
+
+</body>
+</html>

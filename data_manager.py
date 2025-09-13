@@ -38,7 +38,8 @@ class DataManager:
             title=movie_data["title"],
             director=movie_data["director"],
             year=int(movie_data["year"]),
-            poster_url=movie_data["poster_url"]
+            poster_url=movie_data["poster_url"],
+            user_id=movie_data["user_id"]
         )
         db.session.add(new_movie)
         db.session.commit()
