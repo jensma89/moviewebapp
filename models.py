@@ -55,7 +55,6 @@ class Movie(db.Model):
     title = db.Column(
         db.String(200),
         nullable=False,
-        unique=True
     )
     director = db.Column(
         db.String(200),
@@ -75,6 +74,14 @@ class Movie(db.Model):
         db.ForeignKey('user.id'),
         nullable=False
     )
+
+    # Different users can contain the same movie in the list
+    __table_args__ = (
+        db.UniqueConstraint(
+            "title",
+            "user_id",
+            name="uix_title_user"),
+        )
 
 
     def __repr__(self):
