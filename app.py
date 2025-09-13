@@ -38,6 +38,14 @@ def submit_new_user_to_database():
     return redirect(url_for("home"))
 
 
+@app.get("/users/<int:user_id>/movies")
+def list_user_movies(user_id):
+    """Show all favorite movies for a specific user."""
+    user = data_manager.get_user_by_id(user_id)
+    movies = user.movies
+    return render_template("user_movies.html",
+                           user=user,
+                           movies=movies)
 
 
 

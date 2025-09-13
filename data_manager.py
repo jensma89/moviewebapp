@@ -20,6 +20,11 @@ class DataManager:
         return User.query.all()
 
 
+    def get_user_by_id(self, user_id):
+        """Get a single user by id"""
+        return User.query.get(user_id)
+
+
     def get_movies(self, user_id):
         """Get all movies in the database by specified user id"""
         return (Movie.query
@@ -43,7 +48,7 @@ class DataManager:
     def update_movie(self, movie_id, new_title):
         """Update a movie by specified id in the database"""
         movie = Movie.query.get(movie_id)
-        if not Movie:
+        if not movie:
             return None
         movie.title = new_title
         db.session.commit()
