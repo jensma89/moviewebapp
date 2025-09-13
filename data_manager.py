@@ -27,13 +27,13 @@ class DataManager:
                 .all())
 
 
-    def add_movie(self, movie):
-        """Add a new movie to the database"""
+    def add_movie(self, movie_data):
+        """Add a movie to the database  """
         new_movie = Movie(
-            title=movie.title,
-            director=movie.director,
-            year=movie.year,
-            poster_url=movie.poster_url
+            title=movie_data["title"],
+            director=movie_data["director"],
+            year=int(movie_data["year"]),
+            poster_url=movie_data["poster_url"]
         )
         db.session.add(new_movie)
         db.session.commit()

@@ -2,11 +2,16 @@
 fetch_movie.py
 """
 import requests
+import os
+
+
+
+API_KEY = os.getenv("OMDB_API_KEY")
 
 
 def fetch_movie_date(title):
-    api_key = "ADD MY KEY HERE"
-    url = f"http://www.omdbapi.com/?t={title}&apikey={api_key}"
+    """Fetch movie data from omdb API"""
+    url = f"http://www.omdbapi.com/?t={title}&apikey={API_KEY}"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
