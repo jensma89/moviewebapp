@@ -118,6 +118,18 @@ header .mode-switch:hover {
     background-color: #666;
 }
 
+.page-title {
+    text-align: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.page-title h2 {
+    margin: 0;
+    font-size: 1.6em;
+    text-align: center;
+}
+
 /* User & Movie Cards */
 .user-card, .movie-card {
     background-color: #2b2b2b;

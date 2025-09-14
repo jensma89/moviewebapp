@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Movies - MovieWebApp</title>
 </head>
 <body>
@@ -19,26 +18,32 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ user.name }}'s Favorite Movies</h2>
-
-{% for movie in movies %}
-<div class="movie-card">
-    <img src="{{ movie.poster_url }}" alt="Movie Cover">
-    <h3>{{ movie.title }}</h3>
-    <p>{{ movie.director }} ({{ movie.year }})</p>
-
-    <!-- Update Movie Form -->
-    <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
-        <input type="text" name="title" placeholder="New title" title="Insert new movie title" required>
-        <button type="submit" class="update" title="Submit to update">Update</button>
-    </form>
-
-    <!-- Delete Movie Form -->
-    <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
-        <button type="submit" class="delete" title="Submit to delete">Delete</button>
-    </form>
+<div class="page-title">
+    <h2>{{ user.name }}'s Favorite Movies</h2>
 </div>
-{% endfor %}
+
+<div class="movie-container">
+    {% for movie in movies %}
+    <div class="movie-card">
+        <img src="{{ movie.poster_url }}" alt="Movie Cover">
+        <h3>{{ movie.title }}</h3>
+        <p>{{ movie.director }} ({{ movie.year }})</p>
+
+        <div class="movie-actions">
+            <!-- Update Movie Form -->
+            <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
+                <input type="text" name="title" placeholder="New title" title="Insert new movie title" required>
+                <button type="submit" class="update" title="Submit to update">Update</button>
+            </form>
+
+            <!-- Delete Movie Form -->
+            <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
+                <button type="submit" class="delete" title="Submit to delete">Delete</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
 
 </body>
