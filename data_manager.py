@@ -1,6 +1,10 @@
 """
 data_manager.py
+
+This file contains CRUD operations to handle users
+and their movie library.
 """
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from models import db, User, Movie
 
 
@@ -9,10 +13,15 @@ class DataManager:
 
     def create_user(self, name):
         """Create a new user in the database"""
-        new_user = User(name=name)
-        db.session.add(new_user)
-        db.session.commit()
-        return new_user
+        try:
+            new_user = User(name=name)
+            db.session.add(new_user)
+            db.session.commit()
+            return new_user
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error creating user '{name}': {e}")
+            return None
 
 
     def get_users(self):
@@ -33,34 +42,65 @@ class DataManager:
 
 
     def add_movie(self, movie_data):
-        """Add a movie to the database  """
-        new_movie = Movie(
-            title=movie_data["title"],
-            director=movie_data["director"],
-            year=int(movie_data["year"]),
-            poster_url=movie_data["poster_url"],
-            user_id=movie_data["user_id"]
-        )
-        db.session.add(new_movie)
-        db.session.commit()
-        return new_movie
+        """Add a movie to the database"""
+        try:
+            new_movie = Movie(
+                title=movie_data["title"],
+                director=movie_data["director"],
+                year=int(movie_data["year"]),
+                poster_url=movie_data["poster_url"],
+                user_id=movie_data["user_id"]
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return new_movie
+        except IntegrityError as e:
+            db.session.rollback()
+            print(f"IntegrityError: Movie "
+                  f"'{movie_data['title']}' "
+                  f"for user {movie_data['user_id']} "
+                  f"already exists. {e}")
+            return None
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error adding movie '{movie_data['title']}': {e}")
+            return None
 
 
     def update_movie(self, movie_id, new_title):
         """Update a movie by specified id in the database"""
         movie = Movie.query.get(movie_id)
         if not movie:
+            print(f"Movie with id {movie_id} not found.")
             return None
-        movie.title = new_title
-        db.session.commit()
-        return movie
+        try:
+            movie.title = new_title
+            db.session.commit()
+            return movie
+        except IntegrityError as e:
+            db.session.rollback()
+            print(f"IntegrityError: Movie title "
+                  f"'{new_title}' already exists. {e}")
+            return None
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error updating movie id "
+                  f"{movie_id}: {e}")
+            return None
 
 
     def delete_movie(self, movie_id):
         """Delete a movie by id from the database"""
         movie = Movie.query.get(movie_id)
         if not Movie:
-            return False
-        db.session.delete(movie)
-        db.session.commit()
-        return True
+            if not movie:
+                print(f"Movie with id {movie_id} not found.")
+                return False
+        try:
+            db.session.delete(movie)
+            db.session.commit()
+            return True
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error deleting movie id '{movie_id}': {e}")
+            return None
