@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>500 - Internal Server Error</title>
+    <title>403 - Bad Request</title>
 </head>
 <body>
 
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Internal Server Error (500)</h2>
-  <p>Oops! Something went wrong on our side.</p>
+  <h2>Bad Request (403)</h2>
+  <p>Sorry, this method is not allowed!</p>
   <a href="{{ url_for('home') }}">
   </a>
 {% endblock %}

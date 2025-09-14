@@ -12,12 +12,14 @@
     <div class="header-top">
         <h1>MovieWebApp</h1>
         {% block header_form %}{% endblock %}
-        <button class="mode-switch" onclick="toggleMode()">🌙</button>
+        <button class="mode-switch" onclick="toggleMode()" title="Dark/Light Mode">🌙</button>
     </div>
   </header>
 
-  <nav>
-    Navigation here
+  <nav class="navbar">
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}" title="Back to Home">Home</a>
+    </div>
   </nav>
 
   <main class="container">

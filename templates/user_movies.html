@@ -13,8 +13,8 @@
 
 {% block header_form %}
 <form class="header-form" method="POST" action="{{ url_for('add_movie_to_list', user_id=user.id) }}">
-    <input type="text" name="title" placeholder="Movie Title" required>
-    <button type="submit" class="add">Add Movie</button>
+    <input type="text" name="title" placeholder="Movie Title" title="Insert a movie title" required>
+    <button type="submit" class="add" title="Submit add movie">Add Movie</button>
 </form>
 {% endblock %}
 
@@ -29,13 +29,13 @@
 
     <!-- Update Movie Form -->
     <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
-        <input type="text" name="title" placeholder="New title" required>
-        <button type="submit" class="update">Update</button>
+        <input type="text" name="title" placeholder="New title" title="Insert new movie title" required>
+        <button type="submit" class="update" title="Submit to update">Update</button>
     </form>
 
     <!-- Delete Movie Form -->
     <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
-        <button type="submit" class="delete">Delete</button>
+        <button type="submit" class="delete" title="Submit to delete">Delete</button>
     </form>
 </div>
 {% endfor %}

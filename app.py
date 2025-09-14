@@ -139,6 +139,11 @@ def bad_request(error):
     return render_template("400.html"), 400
 
 
+@app.errorhandler(403)
+def forbidden(error):
+    return render_template("403.html"), 403
+
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template("404.html"), 404
