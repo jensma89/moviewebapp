@@ -98,9 +98,23 @@ def delete_movie(user_id, movie_id):
 
 
 
+@app.errorhandler(400)
+def bad_request(error):
+    return render_template("400.html"), 400
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("500.html"), 500
 
 
 
+# Secret API key
 load_dotenv()
 api_key = os.getenv("OMDB_API_KEY")
 

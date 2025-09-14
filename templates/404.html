@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Not Found Error</title>
+</head>
+<body>
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Page Not Found (404)</h2>
+  <p>Sorry, the page you requested does not exist.</p>
+  <a href="{{ url_for('home') }}">
+    <button>Back to Home</button>
+  </a>
+{% endblock %}
+
+</body>
+</html>

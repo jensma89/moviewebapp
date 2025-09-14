@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
     <title>MovieWebApp</title>
 </head>
 <body>
@@ -13,12 +12,10 @@
     <h1>MovieWebApp</h1>
   </header>
 
-  <nav>Navigation here</nav> <!-- add navigation links later -->
+  <nav>Navigation here</nav>
 
   <main class="container">
         {% block content %}{% endblock %}
   </main>
-
-
 </body>
 </html>
