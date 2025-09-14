@@ -11,20 +11,22 @@
 
 {% extends "base.html" %}
 
+{% block header_form %}
+<form class="header-form" method="POST" action="{{ url_for('submit_new_user_to_database') }}">
+    <input type="text" name="name" placeholder="User Name" required>
+    <button type="submit" class="add">Add User</button>
+</form>
+{% endblock %}
+
 {% block content %}
 <h2>Registered Users</h2>
 
-<form method="POST" action="{{ url_for('submit_new_user_to_database') }}">
-    <input type="text" name="name" placeholder="User Name" required>
-    <button type="submit">Add New User</button>
-</form>
-
 {% for user in users %}
-    <a href="{{ url_for('list_user_movies', user_id=user.id) }}" style="text-decoration: none; color: inherit;">
-        <div style="border: 1px solid #ccc; padding: 10px; margin: 5px; cursor: pointer;">
-            <h3>{{ user.name }}</h3>
-        </div>
-    </a>
+<a href="{{ url_for('list_user_movies', user_id=user.id) }}">
+    <div class="user-card">
+        <h3>{{ user.name }}</h3>
+    </div>
+</a>
 {% endfor %}
 {% endblock %}
 </body>

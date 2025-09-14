@@ -9,13 +9,27 @@
 </head>
 <body>
   <header>
-    <h1>MovieWebApp</h1>
+    <div class="header-top">
+        <h1>MovieWebApp</h1>
+        {% block header_form %}{% endblock %}
+        <button class="mode-switch" onclick="toggleMode()">🌙</button>
+    </div>
   </header>
 
-  <nav>Navigation here</nav>
+  <nav>
+    Navigation here
+  </nav>
 
   <main class="container">
         {% block content %}{% endblock %}
   </main>
+
+  <script>
+    function toggleMode() {
+        document.body.classList.toggle('light');
+        const btn = document.querySelector('.mode-switch');
+        btn.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+    }
+  </script>
 </body>
 </html>

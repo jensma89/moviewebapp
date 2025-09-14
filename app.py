@@ -104,9 +104,13 @@ def update_movie_title(user_id, movie_id):
     """Change the movie title without OMDb correction"""
     new_title = request.form.get("title")
     try:
-        data_manager.update_movie(movie_id, new_title)
+        success = data_manager.update_movie(movie_id, new_title)
+        if not success:
+            print(f"Warning: Movie {movie_id} "
+                  f"was not updated!")
     except Exception as e:
         print(f"Error database update failed: {e}")
+    finally:
         return redirect(url_for(
             "list_user_movies",
             user_id=user_id))
@@ -116,12 +120,17 @@ def update_movie_title(user_id, movie_id):
 def delete_movie(user_id, movie_id):
     """Delete a movie from the database of a specific user."""
     try:
-        data_manager.delete_movie(movie_id)
+        success = data_manager.delete_movie(movie_id)
+        if not success:
+            print(f"Warning: Movie {movie_id} "
+                  f"could not be deleted.")
     except Exception as e:
         print(f"Error database delete failed: {e}")
+    finally:
         return redirect(url_for(
             "list_user_movies",
             user_id=user_id))
+
 
 
 

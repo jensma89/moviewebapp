@@ -1,0 +1,210 @@
+/* General Settings */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header & Top Bar */
+header {
+    background-color: #0b3d91;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+}
+
+.header-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.header-form input[type="text"] {
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+}
+
+header .mode-switch {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+header .mode-switch:hover {
+    background-color: #666;
+}
+
+/* User & Movie Cards */
+.user-card, .movie-card {
+    background-color: #2b2b2b;
+    padding: 12px 15px;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.user-card:hover, .movie-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.user-card h3, .movie-card h3 {
+    margin: 8px 0;
+}
+
+/* Movie Poster */
+.movie-card img {
+    width: 100%;
+    height: 320px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.movie-card p {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+}
+
+/* Movie Card Forms (Update/Delete) */
+.movie-card form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.movie-card form input[type="text"] {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    width: 120px;
+}
+
+.movie-card form button {
+    padding: 4px 10px;
+    font-size: 0.9em;
+}
+
+/* Buttons */
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button.add {
+    background-color: #4caf50;
+    color: white;
+}
+
+button.update {
+    background-color: #007bff;
+    color: white;
+}
+
+button.delete {
+    background-color: #e53935;
+    color: white;
+}
+
+/* Main Container */
+.container {
+    padding: 80px 20px 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Responsive for small devices */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-form {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .user-card, .movie-card {
+        width: 100%;
+    }
+}
+
+/* Dark/Light Mode */
+body.light {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+body.light .user-card,
+body.light .movie-card {
+    background-color: #e0e0e0;
+    color: #1a1a1a;
+}
+
+body.light header {
+    background-color: #0b3d91;
+}
+
+body.light button.add {
+    background-color: #4caf50;
+}
+
+body.light button.update {
+    background-color: #007bff;
+}
+
+body.light button.delete {
+    background-color: #e53935;
+}
