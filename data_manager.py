@@ -1,8 +1,7 @@
 """
 data_manager.py
 
-This file contains CRUD operations to handle users
-and their movie library.
+Database access and management for users and movies.
 """
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from models import db, User, Movie
