@@ -14,7 +14,7 @@
 <form class="header-form" method="POST" action="{{ url_for('add_movie_to_list', user_id=user.id) }}">
     <label for="new-movie-title" class="visually-hidden">Insert a Movie Title</label>
     <input id="new-movie-title" type="text" name="title" placeholder="Movie Title" required>
-    <button type="submit">Add Movie</button>
+    <button type="submit" style="background-color: green; color: white;">Add Movie</button>
 </form>
 {% endblock %}
 
@@ -35,12 +35,12 @@
             <form method="POST" action="{{ url_for('update_movie_title', user_id=user.id, movie_id=movie.id) }}">
                 <label for="update-title-{{ movie.id }}" class="visually-hidden">Insert New Title</label>
                 <input id="update-title-{{ movie.id }}" type="text" name="title" placeholder="New title" required>
-                <button type="submit">Update</button>
+                <button type="submit" style="background-color: darkblue; color: white;">Update</button>
             </form>
 
             <!-- Delete Movie Form -->
             <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
-                <button type="submit" aria-label="Delete {{ movie.title }}">Delete</button>
+                <button type="submit" aria-label="Delete {{ movie.title }}" style="background-color: darkred; color: white;">Delete</button>
             </form>
         </div>
     </div>
