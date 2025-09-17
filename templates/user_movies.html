@@ -40,9 +40,12 @@
 
             <!-- Delete Movie Form -->
             <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
-                <button type="submit" aria-label="Delete {{ movie.title }}" style="background-color: darkred; color: white;"
-                     onclick="return confirm('Are you sure you want to delete this book?');">
-                    Delete</button>
+                <button type="submit"
+                    aria-label="Delete {{ movie.title }}. Confirmation will be requested."
+                    style="background-color: darkred; color: white;"
+                    onclick="return confirm('Are you sure you want to delete {{ movie.title }}?');">
+                Delete
+                </button>
             </form>
         </div>
     </div>
