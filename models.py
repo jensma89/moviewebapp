@@ -26,18 +26,20 @@ class User(db.Model):
     # Relationship to movies
     movies = db.relationship(
         'Movie',
-        backref='user',
+        back_populates='user',
         lazy=True
     )
 
 
     def __repr__(self):
+        """Print statements for eg debugging"""
         return (f"User("
                 f"user_id = {self.id},"
                 f"name={self.name})")
 
 
     def __str__(self):
+        """Print statements for the client"""
         return f"User("\
                f"{self.name})"
 
@@ -75,6 +77,11 @@ class Movie(db.Model):
         nullable=False
     )
 
+    user = db.relationship(
+        'User',
+        back_populates='movies'
+    )
+
     # Different users can contain the same movie in the list
     __table_args__ = (
         db.UniqueConstraint(
@@ -85,6 +92,7 @@ class Movie(db.Model):
 
 
     def __repr__(self):
+        """Print statements for eg debugging"""
         return (f"Movie("
                 f"id = {self.id},"
                 f"title = {self.title},"
@@ -95,6 +103,7 @@ class Movie(db.Model):
 
 
     def __str__(self):
+        """Print statements for the client"""
         return   (f"Movie("
                   f"title = {self.title}"
                   f",director = {self.director},"

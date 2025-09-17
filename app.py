@@ -10,16 +10,19 @@ from data_manager import DataManager
 from models import db, Movie
 from dotenv import load_dotenv
 from fetch_movie import fetch_movie_data
+from pathlib import Path
 import os
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config["SQLALCHEMY_DATABASE_URI"] = (f"sqlite:///"
-                                         f"{os.path.join(
-                                             basedir, 
-                                             'data/movies.db')}")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Get the directory of the current file
+basedir = Path(__file__).resolve().parent
+
+# Use pathlib to create the database path
+db_path = basedir / "data" / "movies.db"
+
+# Set SQLAlchemy URI
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 
 db.init_app(app) # Link database to app
 
@@ -136,21 +139,29 @@ def delete_movie(user_id, movie_id):
 
 @app.errorhandler(400)
 def bad_request(error):
+    """Raise an HTTP error, 400 bad request
+    and load the template"""
     return render_template("400.html"), 400
 
 
 @app.errorhandler(403)
 def forbidden(error):
+    """Raise an HTTP error, 403 forbidden
+    and load the template"""
     return render_template("403.html"), 403
 
 
 @app.errorhandler(404)
 def not_found(error):
+    """Raise an HTTP error, 404 not found
+    and load the template"""
     return render_template("404.html"), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
+    """Raise an HTTP error, 500, internal server error
+    and load the template"""
     return render_template("500.html"), 500
 
 
